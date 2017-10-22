@@ -1,6 +1,6 @@
 {
   "name": "function-bus-redis",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Execute functions grouped by key",
   "main": "index.js",
   "scripts": {
