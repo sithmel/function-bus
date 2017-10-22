@@ -19,38 +19,13 @@ describe('function bus', function () {
     bus.queue('b', function (obj) {
       result += obj;
     });
-    assert.equal(bus._length('a'), 2);
-    assert.equal(bus._length('b'), 1);
+    assert.equal(bus.len('a'), 2);
+    assert.equal(bus.len('b'), 1);
     bus.execute('a', ['test']);
     setTimeout(function () {
       assert.equal(result, 'testtest');
-      assert.equal(bus._length('a'), 0);
-      assert.equal(bus._length('b'), 1);
-      done();
-    }, 10);
-  });
-
-  it('pub sub (pause)', function (done) {
-    var bus = new FunctionBus();
-    var result = '';
-    bus.queue('a', function (obj) {
-      result += obj;
-    });
-    bus.queue('a', function (obj) {
-      result += obj;
-    });
-    bus.queue('b', function (obj) {
-      result += obj;
-    });
-    assert.equal(bus._length('a'), 2);
-    assert.equal(bus._length('b'), 1);
-    bus.pause();
-    bus.execute('a', ['test']);
-    bus.resume();
-    setTimeout(function () {
-      assert.equal(result, 'testtest');
-      assert.equal(bus._length('a'), 0);
-      assert.equal(bus._length('b'), 1);
+      assert.equal(bus.len('a'), 0);
+      assert.equal(bus.len('b'), 1);
       done();
     }, 10);
   });
@@ -64,7 +39,7 @@ describe('function bus', function () {
     assert.equal(args[1].message, 'oh my');
   });
 
-  it.only('works across more instances', function (done) {
+  it('works across more instances', function (done) {
     var bus1 = new FunctionBus();
     var bus2 = new FunctionBus();
     var result = '';
@@ -77,14 +52,14 @@ describe('function bus', function () {
     bus1.queue('b', function (obj) {
       result += obj;
     });
-    assert.equal(bus1._length('a'), 1);
-    assert.equal(bus1._length('b'), 1);
+    assert.equal(bus1.len('a'), 1);
+    assert.equal(bus1.len('b'), 1);
     setTimeout(function () {
       bus1.execute('a', ['test']);
       setTimeout(function () {
         assert.equal(result, 'testtest');
-        assert.equal(bus1._length('a'), 0);
-        assert.equal(bus1._length('b'), 1);
+        assert.equal(bus1.len('a'), 0);
+        assert.equal(bus1.len('b'), 1);
         done();
       }, 10);
     }, 10);
