@@ -31,4 +31,4 @@ Options:
 * deserialize [optional]: function used to deserialize the values when they are received from redis
 * channelPrefix [optional]: the prefix used for redis pub/sub
 * redisConfig [optional]: node-redis configuration
-* pub/sub [optional]: redisClients (2 different!). If they are not passe they are created using the options.
+* pub/sub [optional]: redisClients (2 different!). If they are not passed they are created using redisConfig.
