@@ -50,6 +50,7 @@ FunctionBus.prototype.defaultDeserialize = function defaultDeserialize(json) {
 };
 
 FunctionBus.prototype.queue = function queue(key, cb) {
+  if (typeof key !== 'string') throw Error('Queue function: key must be a string')
   if (this.callback_queues[key]) {
     this.callback_queues[key].push(cb);
   } else {
@@ -75,6 +76,7 @@ FunctionBus.prototype._execute = function _execute(key, args) {
 };
 
 FunctionBus.prototype.execute = function execute(key, args) {
+  if (typeof key !== 'string') throw Error('Execute function: key must be a string')
   this.pub.publish(this.channelPrefix + key, this.serialize(args));
 };
 
